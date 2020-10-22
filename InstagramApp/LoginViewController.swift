@@ -6,9 +6,53 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
+    
+    
+    
+    @IBOutlet weak var usernameField: UITextField!
+    
+    @IBOutlet weak var passwordField: UITextField!
+    
+    @IBAction func signIn(_ sender: Any) {
+        
+        let username = usernameField.text!
+        let password = passwordField.text!
+        
+        PFUser.logInWithUsername(inBackground: username, password: password){(user, error) in
+            if user != nil {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            } else {
+                print("Error: \(error?.localizedDescription)")
+            }
+        }
+    
+    }
 
+    
+    @IBAction func signUp(_ sender: Any) {
+        
+        let user =  PFUser()
+        
+        user.username = usernameField.text
+        user.password = passwordField.text
+        
+        user.signUpInBackground(){(success, error) in
+            
+            if success{
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            } else {
+                print("Error: \(String(describing: error?.localizedDescription))")
+            }
+        }
+    }
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +73,9 @@ class LoginViewController: UIViewController {
         
         gradientLayer.frame = self.view.bounds
         
-        gradientLayer.colors = [UIColor.purple.cgColor, UIColor.yellow.cgColor]
+        gradientLayer.colors = [UIColor.purple.cgColor, UIColor.orange.cgColor, UIColor.yellow.cgColor]
+        
+        gradientLayer.locations = [0.0, 0.75, 0.98]
         
         self.view.layer.insertSublayer(gradientLayer, at: 0)
         
