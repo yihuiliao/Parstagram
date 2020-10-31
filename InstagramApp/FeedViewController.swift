@@ -10,11 +10,12 @@ import Parse
 import AlamofireImage
 import MessageInputBar
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MessageInputBarDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
     var posts = [PFObject]()
+    var selectedPost : PFObject!
     
     let refreshControl = UIRefreshControl()
     let commentBar = MessageInputBar()
@@ -32,15 +33,29 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        commentBar.inputTextView.placeholder = "Add a comment..."
+        commentBar.sendButton.title = "Post"
+        commentBar.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.keyboardDismissMode = .interactive
         
         refreshControl.addTarget(self, action: #selector(onRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-
+        
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardWillBeHidden(note:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         // Do any additional setup after loading the view.
     }
+    
+    @objc func keyboardWillBeHidden(note: Notification){
+        commentBar.inputTextView.text = nil
+        showsCommentBar = false
+        becomeFirstResponder()
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -90,6 +105,36 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         
     }
+    
+    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+        
+        let comment = PFObject(className: "Comments")
+        
+        comment["text"] = text
+        comment["post"] = selectedPost
+        comment["author"] = PFUser.current()
+        
+        selectedPost.add(comment, forKey: "comments")
+        
+        selectedPost.saveInBackground{ (success, error) in
+            if success{
+                print("Comment saved")
+            } else {
+                print("Comment failed to save")
+            }
+        }
+        
+        tableView.reloadData()
+        
+        commentBar.inputTextView.text = nil
+        showsCommentBar = false
+        becomeFirstResponder()
+        
+        commentBar.inputTextView.resignFirstResponder()
+        
+
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let post = posts[section]
@@ -143,22 +188,31 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = posts[indexPath.row]
         
-        let comment = PFObject(className: "Comments")
-        comment["text"] = "This is a random comment"
-        comment["post"] = post
-        comment["author"] = PFUser.current()
+        let post = posts[indexPath.section]
+        let comments = (post["comments"] as? [PFObject]) ?? []
         
-        post.add(comment, forKey: "comments")
-        
-        post.saveInBackground{ (success, error) in
-            if success{
-                print("Comment saved")
-            } else {
-                print("Comment failed to save")
-            }
+        if indexPath.row == comments.count + 1 {
+            showsCommentBar = true
+            becomeFirstResponder()
+            commentBar.inputTextView.becomeFirstResponder()
+            
+            selectedPost = post
         }
+
+//        comment["text"] = "This is a random comment"
+//        comment["post"] = post
+//        comment["author"] = PFUser.current()
+//
+//        post.add(comment, forKey: "comments")
+//
+//        post.saveInBackground{ (success, error) in
+//            if success{
+//                print("Comment saved")
+//            } else {
+//                print("Comment failed to save")
+//            }
+//        }
         
     }
     
