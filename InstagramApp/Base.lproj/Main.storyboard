@@ -137,13 +137,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jh-bL-kWh">
-                                                    <rect key="frame" x="8" y="378" width="41.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="16" y="378" width="44.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqh-Bm-6sk">
-                                                    <rect key="frame" x="57.5" y="378" width="348.5" height="21"/>
+                                                    <rect key="frame" x="68.5" y="378" width="337.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -155,7 +155,7 @@
                                                 <constraint firstItem="M2r-9j-tUC" firstAttribute="leading" secondItem="Mpj-21-h0M" secondAttribute="leading" constant="8" id="BfF-gI-YTU"/>
                                                 <constraint firstAttribute="trailing" secondItem="Kqh-Bm-6sk" secondAttribute="trailing" constant="8" id="E2U-9K-g7P"/>
                                                 <constraint firstItem="Kqh-Bm-6sk" firstAttribute="leading" secondItem="0Jh-bL-kWh" secondAttribute="trailing" constant="8" id="Hr8-Tz-d7B"/>
-                                                <constraint firstItem="0Jh-bL-kWh" firstAttribute="leading" secondItem="Mpj-21-h0M" secondAttribute="leading" constant="8" id="J1N-3F-3t7"/>
+                                                <constraint firstItem="0Jh-bL-kWh" firstAttribute="leading" secondItem="Mpj-21-h0M" secondAttribute="leading" constant="16" id="J1N-3F-3t7"/>
                                                 <constraint firstItem="Kqh-Bm-6sk" firstAttribute="top" secondItem="M2r-9j-tUC" secondAttribute="bottom" constant="8" id="J6x-N9-gi8"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Kqh-Bm-6sk" secondAttribute="bottom" constant="8" id="QJq-fr-K5D"/>
                                                 <constraint firstItem="M2r-9j-tUC" firstAttribute="top" secondItem="Mpj-21-h0M" secondAttribute="top" constant="8" id="mAR-vZ-BIA"/>
@@ -165,6 +165,42 @@
                                             <outlet property="captionLabel" destination="Kqh-Bm-6sk" id="7Od-cd-Clq"/>
                                             <outlet property="photoView" destination="M2r-9j-tUC" id="pwK-fM-wgd"/>
                                             <outlet property="usernameLabel" destination="0Jh-bL-kWh" id="fI1-Dp-k6r"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="uYF-eO-frQ" customClass="CommentCell" customModule="InstagramApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="435" width="414" height="37.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uYF-eO-frQ" id="T6j-CI-pRB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzr-dL-gOG">
+                                                    <rect key="frame" x="16" y="8" width="44.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocX-I4-LaA">
+                                                    <rect key="frame" x="68.5" y="8" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gzr-dL-gOG" secondAttribute="bottom" constant="8" id="APt-3V-CGC"/>
+                                                <constraint firstItem="ocX-I4-LaA" firstAttribute="leading" secondItem="gzr-dL-gOG" secondAttribute="trailing" constant="8" id="JHy-1y-YNi"/>
+                                                <constraint firstItem="gzr-dL-gOG" firstAttribute="top" secondItem="T6j-CI-pRB" secondAttribute="top" constant="8" id="QDQ-Nu-MuW"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ocX-I4-LaA" secondAttribute="trailing" constant="8" id="UEg-vz-oGK"/>
+                                                <constraint firstItem="ocX-I4-LaA" firstAttribute="top" secondItem="T6j-CI-pRB" secondAttribute="top" constant="8" id="dpI-Qr-gBO"/>
+                                                <constraint firstItem="ocX-I4-LaA" firstAttribute="leading" secondItem="gzr-dL-gOG" secondAttribute="trailing" constant="8" id="lxL-ye-iOB"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ocX-I4-LaA" secondAttribute="bottom" constant="8" id="mCA-rp-8y0"/>
+                                                <constraint firstItem="gzr-dL-gOG" firstAttribute="leading" secondItem="T6j-CI-pRB" secondAttribute="leading" constant="16" id="pKI-dc-jMd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="ocX-I4-LaA" id="CT1-dt-tXu"/>
+                                            <outlet property="nameLabel" destination="gzr-dL-gOG" id="MUH-or-5Xe"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
